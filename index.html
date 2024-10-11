@@ -146,13 +146,13 @@
         document.getElementById('presetValues').addEventListener('change', function() {
             const preset = this.value;
             if (preset === 'optimistic') {
-                document.getElementById('rateOfStarFormation').value = 2;
-                document.getElementById('fractionWithPlanets').value = 0.5;
+                document.getElementById('rateOfStarFormation').value = 10;
+                document.getElementById('fractionWithPlanets').value = 1;
                 document.getElementById('planetsPerStar').value = 2;
-                document.getElementById('fractionWithLife').value = 0.2;
-                document.getElementById('fractionWithIntelligence').value = 0.1;
-                document.getElementById('fractionWithCommunication').value = 0.1;
-                document.getElementById('lengthOfCommunication').value = 10000;
+                document.getElementById('fractionWithLife').value = 1;
+                document.getElementById('fractionWithIntelligence').value = 0.01;
+                document.getElementById('fractionWithCommunication').value = 0.5;
+                document.getElementById('lengthOfCommunication').value = 1000000;
             } else if (preset === 'conservative') {
                 document.getElementById('rateOfStarFormation').value = 1;
                 document.getElementById('fractionWithPlanets').value = 0.3;
