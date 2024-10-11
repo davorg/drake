@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drake Equation Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .field {
+            margin: 15px 0;
+        }
+        .field label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .field input, .field select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .tooltip {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            color: #007BFF;
+        }
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 0;
+            bottom: 25px;
+            background: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Drake Equation Calculator</h1>
+        <p>Use the form below to input values for each parameter of the Drake Equation. You can also choose from pre-seeded values using the dropdown menu.</p>
+        
+        <div class="field">
+            <label for="rateOfStarFormation">R* - Average rate of star formation in our galaxy</label>
+            <input type="number" id="rateOfStarFormation" value="1" step="0.01" min="0">
+        </div>
+        
+        <div class="field">
+            <label for="fractionWithPlanets">fp - Fraction of stars that have planetary systems <span class="tooltip" data-tooltip="Typical values range from 0.2 to 0.5">?</span></label>
+            <input type="number" id="fractionWithPlanets" value="0.2" step="0.01" min="0" max="1">
+        </div>
+
+        <div class="field">
+            <label for="planetsPerStar">ne - Number of planets per star that could potentially support life</label>
+            <input type="number" id="planetsPerStar" value="1" step="0.01" min="0">
+        </div>
+
+        <div class="field">
+            <label for="fractionWithLife">fl - Fraction of planets where life actually appears</label>
+            <input type="number" id="fractionWithLife" value="0.1" step="0.01" min="0" max="1">
+        </div>
+
+        <div class="field">
+            <label for="fractionWithIntelligence">fi - Fraction of planets with life where intelligent life evolves</label>
+            <input type="number" id="fractionWithIntelligence" value="0.01" step="0.01" min="0" max="1">
+        </div>
+
+        <div class="field">
+            <label for="fractionWithCommunication">fc - Fraction of civilizations that develop technology to communicate</label>
+            <input type="number" id="fractionWithCommunication" value="0.01" step="0.01" min="0" max="1">
+        </div>
+
+        <div class="field">
+            <label for="lengthOfCommunication">L - Length of time such civilizations can communicate (years)</label>
+            <input type="number" id="lengthOfCommunication" value="1000" step="1" min="0">
+        </div>
+
+        <div class="field">
+            <label for="presetValues">Select Preset Values</label>
+            <select id="presetValues">
+                <option value="custom">Custom</option>
+                <option value="optimistic">Optimistic Estimate</option>
+                <option value="conservative">Conservative Estimate</option>
+                <option value="skeptical">Skeptical Estimate</option>
+            </select>
+        </div>
+
+        <div class="result" id="resultDisplay">Number of Civilizations: -</div>
+    </div>
+
+    <script>
+        function calculateDrakeEquation() {
+            const R = parseFloat(document.getElementById('rateOfStarFormation').value) || 0;
+            const fp = parseFloat(document.getElementById('fractionWithPlanets').value) || 0;
+            const ne = parseFloat(document.getElementById('planetsPerStar').value) || 0;
+            const fl = parseFloat(document.getElementById('fractionWithLife').value) || 0;
+            const fi = parseFloat(document.getElementById('fractionWithIntelligence').value) || 0;
+            const fc = parseFloat(document.getElementById('fractionWithCommunication').value) || 0;
+            const L = parseFloat(document.getElementById('lengthOfCommunication').value) || 0;
+
+            const result = R * fp * ne * fl * fi * fc * L;
+            document.getElementById('resultDisplay').textContent = `Number of Civilizations: ${result.toFixed(2)}`;
+        }
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', calculateDrakeEquation);
+        });
+
+        document.getElementById('presetValues').addEventListener('change', function() {
+            const preset = this.value;
+            if (preset === 'optimistic') {
+                document.getElementById('rateOfStarFormation').value = 2;
+                document.getElementById('fractionWithPlanets').value = 0.5;
+                document.getElementById('planetsPerStar').value = 2;
+                document.getElementById('fractionWithLife').value = 0.2;
+                document.getElementById('fractionWithIntelligence').value = 0.1;
+                document.getElementById('fractionWithCommunication').value = 0.1;
+                document.getElementById('lengthOfCommunication').value = 10000;
+            } else if (preset === 'conservative') {
+                document.getElementById('rateOfStarFormation').value = 1;
+                document.getElementById('fractionWithPlanets').value = 0.3;
+                document.getElementById('planetsPerStar').value = 1;
+                document.getElementById('fractionWithLife').value = 0.1;
+                document.getElementById('fractionWithIntelligence').value = 0.01;
+                document.getElementById('fractionWithCommunication').value = 0.01;
+                document.getElementById('lengthOfCommunication').value = 1000;
+            } else if (preset === 'skeptical') {
+                document.getElementById('rateOfStarFormation').value = 0.5;
+                document.getElementById('fractionWithPlanets').value = 0.2;
+                document.getElementById('planetsPerStar').value = 0.5;
+                document.getElementById('fractionWithLife').value = 0.01;
+                document.getElementById('fractionWithIntelligence').value = 0.001;
+                document.getElementById('fractionWithCommunication').value = 0.001;
+                document.getElementById('lengthOfCommunication').value = 500;
+            }
+            calculateDrakeEquation();
+        });
+
+        // Initial calculation
+        calculateDrakeEquation();
+    </script>
+</body>
+</html>
