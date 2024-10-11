@@ -70,6 +70,25 @@
             font-size: 24px;
             font-weight: bold;
         }
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -124,6 +143,11 @@
 
         <div class="result" id="resultDisplay">Number of Civilizations: -</div>
     </div>
+
+    <footer>
+        Made by <a href="https://links.davecross.co.uk/">Dave Cross</a> /
+        Code <a href="https://github.com/davorg/drake" target="_blank">on GitHub</a>
+    </footer>
 
     <script>
         function calculateDrakeEquation() {
