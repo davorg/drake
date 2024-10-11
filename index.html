@@ -78,37 +78,37 @@
         <p>Use the form below to input values for each parameter of the Drake Equation. You can also choose from pre-seeded values using the dropdown menu.</p>
         
         <div class="field">
-            <label for="rateOfStarFormation">R* - Average rate of star formation in our galaxy</label>
+            <label for="rateOfStarFormation">R* - Average rate of star formation in our galaxy <span class="tooltip" data-tooltip="Typical values range from 0.5 to 10">?</span></label>
             <input type="number" id="rateOfStarFormation" value="1" step="0.01" min="0">
         </div>
         
         <div class="field">
-            <label for="fractionWithPlanets">fp - Fraction of stars that have planetary systems <span class="tooltip" data-tooltip="Typical values range from 0.2 to 0.5">?</span></label>
+            <label for="fractionWithPlanets">fp - Fraction of stars that have planetary systems <span class="tooltip" data-tooltip="Typical values range from 0.2 to 0.5 (20% to 50%)">?</span></label>
             <input type="number" id="fractionWithPlanets" value="0.2" step="0.01" min="0" max="1">
         </div>
 
         <div class="field">
-            <label for="planetsPerStar">ne - Number of planets per star that could potentially support life</label>
+            <label for="planetsPerStar">ne - Number of planets per star that could potentially support life <span class="tooltip" data-tooltip="Typical values range from 0.1 to 2">?</span></label>
             <input type="number" id="planetsPerStar" value="1" step="0.01" min="0">
         </div>
 
         <div class="field">
-            <label for="fractionWithLife">fl - Fraction of planets where life actually appears</label>
+            <label for="fractionWithLife">fl - Fraction of planets where life actually appears <span class="tooltip" data-tooltip="Typical values range from 0.01 to 1 (1% to 100%)">?</span></label>
             <input type="number" id="fractionWithLife" value="0.1" step="0.01" min="0" max="1">
         </div>
 
         <div class="field">
-            <label for="fractionWithIntelligence">fi - Fraction of planets with life where intelligent life evolves</label>
+            <label for="fractionWithIntelligence">fi - Fraction of planets with life where intelligent life evolves <span class="tooltip" data-tooltip="Typical values range from 0.00001 to 1 (0.001% to 100%)">?</span></label>
             <input type="number" id="fractionWithIntelligence" value="0.01" step="0.01" min="0" max="1">
         </div>
 
         <div class="field">
-            <label for="fractionWithCommunication">fc - Fraction of civilizations that develop technology to communicate</label>
+            <label for="fractionWithCommunication">fc - Fraction of civilizations that develop technology to communicate <span class="tooltip" data-tooltip="Typical values range from 0.00001 to 1 (0.001% to 100%)">?</span></label>
             <input type="number" id="fractionWithCommunication" value="0.01" step="0.01" min="0" max="1">
         </div>
 
         <div class="field">
-            <label for="lengthOfCommunication">L - Length of time such civilizations can communicate (years)</label>
+            <label for="lengthOfCommunication">L - Length of time such civilizations can communicate (years) <span class="tooltip" data-tooltip="Typical values range from 100 to 10,000 years">?</span></label>
             <input type="number" id="lengthOfCommunication" value="1000" step="1" min="0">
         </div>
 
@@ -136,7 +136,7 @@
             const L = parseFloat(document.getElementById('lengthOfCommunication').value) || 0;
 
             const result = R * fp * ne * fl * fi * fc * L;
-            document.getElementById('resultDisplay').textContent = `Number of Civilizations: ${result.toFixed(2)}`;
+            document.getElementById('resultDisplay').textContent = `Number of Civilizations: ${Math.round(result).toLocaleString()}`;
         }
 
         document.querySelectorAll('input').forEach(input => {
